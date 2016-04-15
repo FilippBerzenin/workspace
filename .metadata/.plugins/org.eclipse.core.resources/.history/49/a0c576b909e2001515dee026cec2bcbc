@@ -1,0 +1,62 @@
+package finalWorks;
+
+import java.util.Arrays;
+
+public class birds {
+
+	static String[][] birdsArray = new String[10][6];
+	
+	static String [][] birds = new String [][] {
+		{"Type", "Bay (om stock)", "Price, $"},
+		{"Eagle", "10", "15"},
+		{"Duck",  "10", "3"}
+	};
+	public static void main(String[] args) {
+
+		birdsArrayFill();
+		ArrayFill();
+		printArray ();
+	}
+
+	static void printArray() {
+//		for (int k = 0; k < birdsArray[0].length; k++) {
+			System.out.println(Arrays.toString(birdsArray[0]));
+//		}
+//		System.out.print("\n");
+		for (int i = 1; i < birdsArray.length; i++) {
+			if (birdsArray[i][0] == null) {
+				break;
+			}
+			System.out.printf("%2s",birdsArray[i][0]);
+			System.out.printf("%-1s%n",birdsArray[i][1]);
+			}
+		}
+	
+	
+
+	static void birdsArrayFill() {
+		birdsArray[0][0] = "¹";
+		birdsArray[0][1] = "Type birds: ";
+		birdsArray[0][2] = "On stock: ";
+		birdsArray[0][3] = "Bay (in stock): ";
+		birdsArray[0][4] = "Sell (out stock): ";
+		birdsArray[0][5] = "Price, $ ";
+	}
+	
+	static void ArrayFill() {
+		String [][] birds = BirdsArray();
+		for (int i = 1, k=1; i<birds.length; i++, k++) {
+		System.arraycopy(birds[i], 0, birdsArray[k], 1, birds[i].length);
+		birdsArrayChange (k);
+		}
+	}
+	static String[][] BirdsArray () {
+		String [][] bird = birds;
+		return bird;
+	}
+	static void birdsArrayChange (int i) {
+		birdsArray[i][0]=Integer.toString(i);
+		birdsArray[i][5]=birdsArray[i][3];
+		birdsArray[i][3]=null;		
+	}
+}

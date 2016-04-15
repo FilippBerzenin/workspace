@@ -1,0 +1,407 @@
+package kubik_rubik;
+
+import java.util.Arrays;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Frame;
+import java.awt.Graphics;
+import java.util.Random;
+import java.util.Scanner;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.WindowConstants;
+import javax.swing.JLabel;
+
+public class main_page extends JPanel {
+	
+	final boolean COLORDED_MODE = false;
+	
+	final static int SQUARE_SIZE_HEIGHT = 64;
+	final static int SQUARE_SIZE_WIDTH = 64;
+	final static int SIZE_HEIGHT = 3;
+	final static int SIZE_WIDTH = 3;
+	
+	final static int GREEN_COLOUR = 0;
+	
+	final static int GREEN = 0;
+	final static int RED = 1;
+	final static int YELLOW = 2;
+	final static int LILAC = 3;
+	final static int BLUE = 4;
+	final static int PURPLE = 5;
+	
+	final static int LEFT = 0;
+//	final static int CENTER = 1;
+	final static int RIGHT  = 2;
+								
+	final static int TOP = 3;
+	final static int MIDDLE = 4;
+	final static int BOOTOM = 5;
+	
+	final static int UP_TURN = 1;
+	final static int DOWN_TURN = 2;
+	final static int LEFT_TURN = 3; 
+	final static int RIGHT_TURN = 4;
+	
+		static String [][][] main = new String [][][] {
+			{
+				{ "green_red_purple", "green_red", "green_red_blue" },
+				{ "green_purple", "green_center", "green_blue" },
+				{ "green_lilac_purple", "green_lilac", "green__lilac_blue" }
+			},
+			
+			{
+				{ "red_yellow_purple", "red_yellow", "red_yellow_blue"},
+				{ "red_purple", "red_centre", "red_blue"},
+				{ "red_green_purple", "red_green", "red_green_blue"}
+			},
+			
+			{
+				{ "yellow_lilac_purple", "yellow_lilac", "yellow_lilac_blue"},
+				{ "yellow_purple", "yellow_center", "yellow_blue"},
+				{ "yellow_red_purple", "yellow_red", "yellow_red_blue"}
+			},
+			
+			{
+				{ "lilac_green_purple", "lilac_green", "lilac_green_blue"},
+				{ "lilac_purple", "lilac_center", "lilac_blue"},
+				{ "lilac_yellow_purple", "lilac_yellow", "lilac_yellow_blue"}
+			},
+			
+			{
+				{ "blue_lilac_yellow", "blue_lilac", "blue_lilac_green"},
+				{ "blue_yellow", "blue_center", "blue_green"},
+				{ "blue_red_yellow", "blue_red", "blue_red_green"}
+			},
+			
+			{
+				{ "purple_red_yellow", "purple_red", "purple_red_green"},
+				{ "purple_yellow", "purple_center", "purple_green"},
+				{ "purple_lilac_yellow", "purple_lilac", "purple_lilac_green"}
+			}
+		};
+		
+//		static String[] interpositionGreen  = new String[] 
+//		{ "green", "red", "yellow", "lilac"};
+
+//		static String[] interpositionPurple  = new String[] 
+//		{ "purple", "red", "blue", "lilac"};
+		
+	public static void main(String[] args) {
+		
+		left_right_top(GREEN, RIGHT, DOWN_TURN);
+
+//		printColor(GREEN);
+//		printColor(RED);
+//		printColor(YELLOW);
+//		printColor (LILAC);
+//		printColor (BLUE);
+//		printColor (PURPLE);
+		
+		frame ();
+	
+		String[][] colourArray = colourArrayFill (GREEN);		
+//		static String[][] colourArrayRed = new String [3][3];
+//		static String[][] colourArrayYellow = new String [3][3];
+//		static String[][] colourArrayLilac = new String [3][3];
+//		static String[][] colourArrayBlue = new String [3][3];
+//		static String[][] colourArrayPurple = new String [3][3];
+
+	}
+
+
+	static String[][] colourArrayFill (int colour) {
+		String[][] newArray = main[colour];
+		for (int i = 0; i < newArray.length; i++) {
+			for (int j = 0; j < newArray[i].length; j++) {
+				newArray[i][j] = squareColour(newArray[i][j]);
+			}
+			System.out.println(Arrays.toString(newArray[i]));
+		}
+		return newArray;
+	}
+
+	static void frame () {
+	JFrame frame = new JFrame("KUBIK RUBIK FIELD"); 
+	frame.setSize(450, 450); 
+	frame.setMinimumSize(new Dimension((SQUARE_SIZE_HEIGHT*SIZE_HEIGHT), (SQUARE_SIZE_WIDTH*SIZE_WIDTH)));
+	frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+	JLabel lebel = new JLabel ("Test label");
+	frame.getContentPane().add(lebel);
+//	frame.pack();
+	frame.setVisible(true);
+	}
+	
+	@Override
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		System.out.println("Start");
+		int i = 0;
+		Color cc;
+		for (int v = 0; v < SIZE_HEIGHT; v++) {
+			for (int h = 0; h < SIZE_WIDTH; h++) {
+				if (COLORDED_MODE) {
+					if (i % 2 == 0) {
+						cc = new Color(252, 241, 177);
+					} else {
+						cc = new Color(233, 243, 255);
+					}
+				} else {
+					cc = new Color(180, 180, 180);
+				}
+				i++;
+				g.setColor(cc);
+				g.fillRect(h * 64, v * 64, 64, 64);
+			}
+		}
+		String[][] colourArray = colourArrayFill (GREEN);
+		int x = 0;
+		int y = 0;
+		for (int j = 0; j < colourArray.length; j++) {
+			for (int k = 0; k < colourArray[j].length; k++) {
+				x = j*64;
+				y = k*64;
+				if (colourArray[j][k].equals("G")) {
+					g.setColor(new Color(144, 77, 48));
+					g.fillRect(x, y, SQUARE_SIZE_HEIGHT, SQUARE_SIZE_WIDTH);
+				}
+			}
+		}
+	}
+	
+	static String squareColour (String square) {
+		int endFind = square.indexOf("_");
+		String colour = square.substring(0,endFind);
+		switch (colour) {
+		case "green":
+			colour = "G";
+			break;
+		case "red":
+			colour = "R";
+			break;
+		case "yellow":
+			colour = "Y";
+			break;
+		case "lilac":
+			colour = "L";
+			break;
+		case "blue":
+			colour = "B";
+			break;
+		case "purple":
+			colour = "P";
+			break;
+		default:
+		}
+		return colour;
+		
+	}
+
+	static void printColor(int color) {
+		printSide(color, TOP);
+		printSide(color, MIDDLE);
+		printSide(color, BOOTOM);
+		System.out.println();
+	}
+
+	static void left_right_top(int colour, int side, int direction) {
+		if (errorTurn(side, direction) == false) {
+			System.out.println("Error of direction");
+			System.exit(0);
+		}
+		side = changeSide(side);
+		int[] nextColours = sequenceColour(colour);
+		if (direction == 1) {
+			for (int i = 0; i < 3; i++) {
+				String memFirst = main[colour][i][side];
+				main[colour][i][side] = main[nextColours[0]][i][side];
+				main[nextColours[0]][i][side] = main[nextColours[1]][i][side];
+				main[nextColours[1]][i][side] = main[nextColours[2]][i][side];
+				main[nextColours[2]][i][side] = memFirst;
+			}
+			String mem = main[nextColours[5]][0][0];
+			main[nextColours[BLUE]][0][0] = main[nextColours[BLUE]][2][0];
+			main[nextColours[BLUE]][2][0] = main[nextColours[BLUE]][2][2];
+			main[nextColours[BLUE]][2][2] = main[nextColours[BLUE]][0][2];
+			main[nextColours[BLUE]][0][2] = mem;
+			String memCenter = main[nextColours[BLUE]][1][2];
+			main[nextColours[BLUE]][1][2] = main[nextColours[BLUE]][0][1];
+			main[nextColours[BLUE]][0][1] = main[nextColours[BLUE]][1][0];
+			main[nextColours[BLUE]][1][0] = main[nextColours[BLUE]][2][1];
+			main[nextColours[BLUE]][2][1] = memCenter;
+		}
+
+		if (direction == 2) {
+			for (int i = 0; i < 3; i++) {
+				String memFirst = main[colour][i][side];
+				main[colour][i][side] = main[nextColours[2]][i][side];
+				main[nextColours[2]][i][side] = main[nextColours[1]][i][side];
+				main[nextColours[1]][i][side] = main[nextColours[0]][i][side];
+				main[nextColours[0]][i][side] = memFirst;
+			}
+			String mem = main[nextColours[5]][0][0];
+			main[nextColours[PURPLE]][0][0] = main[nextColours[PURPLE]][2][0];
+			main[nextColours[PURPLE]][2][0] = main[nextColours[PURPLE]][2][2];
+			main[nextColours[PURPLE]][2][2] = main[nextColours[PURPLE]][0][2];
+			main[nextColours[PURPLE]][0][2] = mem;
+			String memCenter = main[nextColours[PURPLE]][1][2];
+			main[nextColours[PURPLE]][1][2] = main[nextColours[PURPLE]][0][1];
+			main[nextColours[PURPLE]][0][1] = main[nextColours[PURPLE]][1][0];
+			main[nextColours[PURPLE]][1][0] = main[nextColours[PURPLE]][2][1];
+			main[nextColours[PURPLE]][2][1] = memCenter;
+		}
+
+		if (direction == 3) {
+			for (int i = 0; i < 3; i++) {
+				String memFirst = main[colour][side][i];
+				main[colour][side][i] = main[nextColours[4]][side][i];
+				main[nextColours[4]][side][i] = main[nextColours[1]][side][i];
+				main[nextColours[1]][side][i] = main[nextColours[5]][side][i];
+				main[nextColours[5]][side][i] = memFirst;
+			}
+
+			int nextColour = nextColours[2];
+			String mem = main[nextColours[2]][0][0];
+			main[nextColours[2]][0][0] = main[nextColours[2]][2][0];
+			main[nextColours[2]][2][0] = main[nextColours[2]][2][2];
+			main[nextColours[2]][2][2] = main[nextColours[2]][0][2];
+			main[nextColours[2]][0][2] = mem;
+			String memCenter = main[nextColours[2]][1][2];
+			main[nextColours[2]][1][2] = main[nextColours[2]][0][1];
+			main[nextColours[2]][0][1] = main[nextColours[2]][1][0];
+			main[nextColours[2]][1][0] = main[nextColours[2]][2][1];
+			main[nextColours[2]][2][1] = memCenter;
+		}
+
+		if (direction == 4) {
+			for (int i = 0; i < 3; i++) {
+				String memFirst = main[colour][side][i];
+				main[colour][side][i] = main[nextColours[5]][side][i];
+				main[nextColours[5]][side][i] = main[nextColours[1]][side][i];
+				main[nextColours[1]][side][i] = main[nextColours[4]][side][i];
+				main[nextColours[4]][side][i] = memFirst;
+			}
+
+			int nextColour = nextColours[2];
+			String mem = main[nextColours[2]][0][0];
+			main[nextColours[2]][0][0] = main[nextColours[2]][0][2];
+			main[nextColours[2]][0][2] = main[nextColours[2]][2][2];
+			main[nextColours[2]][2][2] = main[nextColours[2]][2][0];
+			main[nextColours[2]][2][0] = mem;
+			String memCenter = main[nextColours[2]][1][2];
+			main[nextColours[2]][1][2] = main[nextColours[2]][2][1];
+			main[nextColours[2]][2][1] = main[nextColours[2]][1][0];
+			main[nextColours[2]][1][0] = main[nextColours[2]][0][1];
+			main[nextColours[2]][0][1] = memCenter;
+		}
+
+	}
+
+	static int[] sequenceColour(int colour) {
+		int[] nextColours = null;
+		switch (colour) {
+		case GREEN:
+			nextColours = new int[] { LILAC, YELLOW, RED, GREEN, BLUE, PURPLE };
+			break;
+		case RED:
+			nextColours = new int[] { GREEN, LILAC, YELLOW, RED, BLUE, PURPLE };
+			break;
+		case YELLOW:
+			nextColours = new int[] { RED, GREEN, LILAC, YELLOW, BLUE, PURPLE };
+			break;
+		case LILAC:
+			nextColours = new int[] { YELLOW, RED, GREEN, LILAC, BLUE, PURPLE };
+			break;
+		case BLUE:
+			nextColours = new int[] { LILAC, PURPLE, RED, BLUE, YELLOW, GREEN };
+			break;
+		case PURPLE:
+			nextColours = new int[] {};
+			break;
+		default:
+			break;
+		}
+		return nextColours;
+	}
+
+	static void printSide(int colour, int side) {
+		side = changeSide(side);
+		for (int i = 0; i < 3; i++) {
+			System.out.print(main[colour][side][i] + ", ");
+		}
+		System.out.println();
+	}
+
+	static boolean errorTurn(int side, int direction) {
+		if (side == LEFT || side == RIGHT) {
+			if (direction == UP_TURN || direction == DOWN_TURN) {
+				return true;
+			}
+		}
+		if (side == TOP || side == BOOTOM) {
+			if (direction == LEFT_TURN || direction == RIGHT_TURN) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	static int changeSide(int side) {
+		switch (side) {
+		case 3:
+			side = 0;
+			break;
+		case 4:
+			side = 1;
+			break;
+		case 5:
+			side = 2;
+		default:
+			break;
+		}
+		return side;
+	}
+}
+
+
+//static String[][] green = new String[][] {
+//{ "green_red_purple", "green_red", "green_red_blue" },
+//{ "green_purple", "green_center", "green_blue" },
+//{ "green_lilac_purple", "green_lilac", "green__lilac_blue" } };
+//
+//static String[][] red = new String[][] {
+//{ "red_yellow_purple", "red_yellow", "red_yellow_blue"},
+//{ "red_purple", "red_centre", "red_blue"},
+//{ "red_green_purple", "red_green", "red_green_blue"}
+//};
+//
+//static String [][] yellow = new String [][] {
+//{ "yellow_lilac_purple", "yellow_lilac", "yellow_lilac_blue"},
+//{ "yellow_purple", "yellow_center", "yellow_blue"},
+//{ "yellow_red_purple", "yellow_red", "yellow_red_blue"}
+//};
+//
+//static String [][] lilac = new String [][] {
+//{ "lilac_green_purple", "lilac_green", "lilac_green_blue"},
+//{ "lilac_purple", "lilac_center", "lilac_blue"},
+//{ "lilac_yellow_purple", "lilac_yellow", "lilac_yellow_blue"}
+//};
+//
+//static String [][] blue = new String [][] {
+//{ "blue_lilac_yellow", "blue_lilac", "blue_lilac_green"},
+//{ "blue_yellow", "blue_center", "blue_green"},
+//{ "blue_red_yellow", "blue_red", "blue_red_green"}
+//};
+//
+//static String [][] purple = new String [][] {
+//{ "purple_red_yellow", "purple_red", "purple_red_green"},
+//{ "purple_yellow", "purple_center", "purple_green"},
+//{ "purple_lilac_yellow", "purple_lilac", "purple_lilac_green"}
+//};
+
+
+
+
+
+
+

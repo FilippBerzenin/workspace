@@ -1,0 +1,9 @@
+package Tank;
+
+public class tank {
+	
+	String color;
+	int maxSpeed;
+	int crew; 
+
+}

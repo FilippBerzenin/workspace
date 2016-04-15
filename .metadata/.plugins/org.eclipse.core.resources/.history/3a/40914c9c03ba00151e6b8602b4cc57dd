@@ -1,0 +1,33 @@
+package Lesson_3;
+
+public class test {
+
+	public static void main(String[] args) {
+
+        int[] arr = {1, 2, 3, 4, 5};
+        int[] arr1 = {4, 2};
+        int[] arr2 = {1};
+   //     int[] arr4 = null;
+        
+       
+
+        System.out.println(oddElementSum(arr));
+        System.out.println(oddElementSum(arr1));
+        System.out.println(oddElementSum(arr2));
+   //     System.out.println(oddElementSum(arr4));
+      
+    }
+
+    static int oddElementSum(int data[]) {
+    	int i = 0;
+    	for (int x : data) {
+    		
+        	if (i<data.length) {
+        		x= data[x];
+        		i++;
+        		
+        	}return x;
+        }return -1;
+    }
+
+}

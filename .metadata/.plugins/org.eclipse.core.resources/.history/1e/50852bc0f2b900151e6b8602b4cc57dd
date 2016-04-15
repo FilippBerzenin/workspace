@@ -1,0 +1,31 @@
+package Lesson_3;
+
+public class frame_3_5 {
+
+	public static void main(String[] args) {
+		long[] date = new long [10];
+		date[0] = 1;
+		date[1] = 2;
+		date[2] = 3;
+		date[3] = 4;
+		date[4] = 5;
+		date[5] = 6;
+		date[6] = 7;
+		date[7] = 8;
+		date[8] = 9;
+		date[9] = 10;
+	}
+		long oddElementSum (long[] date){
+			if (date == null) {
+			return -1;} 
+		 else 
+			 
+			 for (int i = 0; i<date.length; i++) {
+				 long sum = (long) date[0];
+				 sum += (long) date[i];
+				 return sum;
+			 }
+			return 1;
+	}
+	
+}

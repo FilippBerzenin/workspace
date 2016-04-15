@@ -1,0 +1,34 @@
+package finalWorks;
+
+public class rounding {
+
+	public static void main(String[] args) {
+		double x = 0.9895;
+		int roundingAfterPoint = 2;
+		String k = null;
+		String xString = Double.toString(x);
+		for (int i = xString.length() - 1; i > roundingAfterPoint; i--) {
+			String xSt = Double.toString(x);
+				k = xSt.substring(i);
+				System.out.println(k);
+				int v = new Integer(k);
+			if (v >= 5) {
+				double r = 1;
+				r = r / Math.pow(10, i - 2);
+				x += r;
+			}
+			System.out.println("chislo "+x);
+			xSt = Double.toString(x);
+			System.out.println(xSt+" xSt");
+			xSt = xSt.substring(0,i);
+			System.out.println(xSt+" xSt new");
+			x = new Double (xSt);
+			System.out.println("new chislo "+x);
+		}
+//		xString = Double.toString(x);
+//		xString = xString.substring(0, roundingAfterPoint+2);
+//		System.out.println(xString);
+	}
+
+
+}

@@ -1,0 +1,49 @@
+package lesson_4;
+
+import java.util.Arrays;
+
+public class birds {
+	
+	static String[] typeBirds = new String [] {"eagle", "duck"};
+	
+	static String[][] priceBirds = new String [][] {{"eagle", "5"}, {"duck", "2"}};
+
+	public static void main(String[] args) {
+	
+				
+		stock(arrayPrice(typeBirds, priceBirds));
+
+	}
+		static String[][][] stock (String[][] arrayPrice) {
+			String [][][] stock = new String [arrayPrice.length+1][5][3];
+			for (int i = 0; i<arrayPrice[0].length-1; i++) {
+				stock[i][0][0] = arrayPrice[i][0];
+			}
+			for (int i = 0; i<arrayPrice[0].length-1; i++) {
+				stock[i][0][1] = arrayPrice[i][1];
+			}
+			for (int i = 0; i<arrayPrice[0].length-1; i++) {
+				stock[i][0][2] = arrayPrice[i][2];
+			}
+			System.out.println(Arrays.toString(stock[0][0]));
+			System.out.println(Arrays.toString(stock[1][0]));
+			return stock;
+		}
+		
+		static String[][] arrayPrice (String[] typeBirds, String[][] priceBirds) {
+			String [][] arrayPrice = new String [typeBirds.length][3];
+			for (int i = 0; i<typeBirds.length; i++) {
+				arrayPrice[i][0] = Integer.toString(i+1);
+			}
+			for (int i = 0; i<typeBirds.length; i++) {
+				arrayPrice[i][1] = typeBirds[i];
+			}
+			for (int i = 0; i<typeBirds.length; i++) {
+				if (priceBirds[i][0].equals(typeBirds[i]))
+						arrayPrice[i][2] = priceBirds[i][1];
+			}
+//			System.out.println(Arrays.toString(arrayPrice[0]));
+			return arrayPrice;
+			
+		}
+}

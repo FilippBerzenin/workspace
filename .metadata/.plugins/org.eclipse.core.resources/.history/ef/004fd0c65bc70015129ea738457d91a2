@@ -1,0 +1,92 @@
+package lesson_4;
+
+import java.util.Arrays;
+
+public class birds {
+	
+	static String[] typeBirds = new String [] {"eagle", "duck"};
+	
+	static String[][] priceBirds = new String [][] {{"eagle", "5"}, {"duck", "2"}};
+
+	public static void main(String[] args) {
+	
+				
+		stock(arrayPrice(typeBirds, priceBirds));
+		int [] bayBirdsEagle = new int [] {
+			5,
+			2,
+			3
+			};
+//		int bayBirdsDuck = 10;
+		bayBirdsEagle(bayBirdsEagle);
+
+	}
+	
+	static String[][] bayBirdsEagle (int []  bayBirdsEagle) {
+		String [][] stockEagle = new String [bayBirdsEagle.length][7];
+			for (int i = 0; i<stockEagle.length; i++) {
+			stockEagle[i][0] = "Eagle";
+			stockEagle[i][1] = "Stock now";
+			stockEagle[i][2] = null;
+			stockEagle[i][3] = "birds in";
+			stockEagle[i][4] = null;
+			stockEagle[i][5] = "birds out";
+			stockEagle[i][6] = null;
+		}
+			for (int i = 0;i<bayBirdsEagle.length; i++) {
+				stockEagle[i][4] = Integer.toString(bayBirdsEagle[i]);
+				System.out.println(Arrays.toString(stockEagle[2]));
+			}
+			for (int i = 0;i<bayBirdsEagle.length; i++) {
+//				stockEagle[i][2] = Integer.toString(bayBirdsEagle[i]-(new Integer (stockEagle[i][6])));
+				System.out.println(Arrays.toString(stockEagle[2]));
+			}
+			
+		return stockEagle;
+	}
+		static String[][][] stock (String[][] arrayPrice) {
+			String [][][] stock = new String [arrayPrice.length][4][0];
+
+			for (int i = 0; i<arrayPrice[0].length-1; i++) {
+				stock[i][0] = new String [1];
+				stock[i][0][0] = arrayPrice[i][0];
+				for (int k = 1; k<arrayPrice[0].length; k++) {
+					stock[i][k] = new String [7];
+					stock[i][k][0] = arrayPrice[i][1];
+					stock[i][k][1] = "Stock now";
+					stock[i][k][2] = null;
+					stock[i][k][3] = "birds in";
+					stock[i][k][4] = null;
+					stock[i][k][5] = "birds out";
+					stock[i][k][6] = null;
+				}
+			}
+			for (int i =0;i<arrayPrice[0].length-1; i++) {
+				stock[i][2] = new String [4]; // при условии введения себестоимости закупки длину поля нужна увеличить.
+				stock[i][2][0] = "priceFoSell";
+				stock[i][2][2] = "priceFoBay";
+				stock[i][2][1] = arrayPrice[i][2];
+			}
+			stock[0][3] = new String [2]; // одно значение входящие
+//			System.out.println(Arrays.toString(stock[0][1]));
+//			System.out.println(Arrays.toString(stock[1][2]));
+//			System.out.println(stock[0][0][0]);
+			return stock;
+		}
+		
+		static String[][] arrayPrice (String[] typeBirds, String[][] priceBirds) {
+			String [][] arrayPrice = new String [typeBirds.length][3];
+			for (int i = 0; i<typeBirds.length; i++) {
+				arrayPrice[i][0] = Integer.toString(i+1);
+			}
+			for (int i = 0; i<typeBirds.length; i++) {
+				arrayPrice[i][1] = typeBirds[i];
+			}
+			for (int i = 0; i<typeBirds.length; i++) {
+				if (priceBirds[i][0].equals(typeBirds[i]))
+						arrayPrice[i][2] = priceBirds[i][1];
+			}
+			return arrayPrice;
+			
+		}
+}

@@ -1,0 +1,40 @@
+package Lesson_3;
+
+public class frame_3_7 {
+
+	public static void main(String[] args) {
+		int[] data = new int [10];
+		data[0] = 1;
+		data[1] = 2;
+		data[2] = 3;
+		data[3] = 4;
+		data[4] = 5;
+		data[5] = 6;
+		data[6] = 7;
+		data[7] = 8;
+		data[8] = 9;
+		data[9] = 10;
+		
+		int[] data1 = null;
+		
+		int[] data2 = {1, 4, 5, 7};
+		
+		swap(data);
+//		System.out.println(swap(data1));
+//		System.out.println(swap(data2));
+
+	}
+	static void swap (int[] data){
+		if (data == null && data.length == 0){
+			System.out.println(-1);
+		}
+
+		for (int index : data) {
+			int mem = data[1];
+			data[index]=data[index+1];
+			data[index+1] = mem;
+			System.out.println(data[index]);
+		}
+		
+	}
+}

@@ -1,0 +1,4 @@
+#Mon Dec 07 07:13:36 EET 2015
+__DEFAULT__=false
+org.eclipse.help.ui.localSearch.master=true
+expression=or

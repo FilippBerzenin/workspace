@@ -1,0 +1,362 @@
+package lesson_4;
+
+import java.util.Arrays;
+
+public class birds {
+	
+	static String[] typeBirds = new String [] {"eagle", "duck", "fenix", "kar"};
+	
+	static String[][] priceBirds = new String [][] {{"eagle", "5"}, {"duck", "2"}, {"fenix", "100"}, {"kar", "2"}};
+
+	public static void main(String[] args) {
+	
+		int [][] bayBirds = new int [][] { // данные по закупкам
+			{5, 2, 3, 4, 5},
+			{10, 15, 10, 4, 5},
+			{3, 3, 3, 4, 4},
+			{1, 1, 4, 5, 5}
+		};
+		
+		int [][] sellBirds = new int [][] { // данные по продажам 
+			{2, 5, 2, 4, 4},
+			{5, 15, 7, 4, 4},
+			{2, 2, 2, 4, 4},
+			{1, 1, 2, 3, 0}
+		};
+
+		dataError(bayBirds, sellBirds);
+
+		staticticFoSellBirds(stockAll(baySellAll (bayBirds, sellBirds), bayBirds, sellBirds), bayBirds, sellBirds);
+	
+		statisticTotalBirds (stockAll(baySellAll (bayBirds, sellBirds), bayBirds, sellBirds), bayBirds, sellBirds);
+		
+//		statisticLessThenTRee (stockAll(baySellAll (bayBirds, sellBirds), bayBirds, sellBirds), bayBirds, sellBirds);
+		
+		statisticBalanceForAll(stockAll(baySellAll (bayBirds, sellBirds), bayBirds, sellBirds));
+		
+		String typeBird = "duck";
+		statisticBalanceForOne(stockAll(baySellAll (bayBirds, sellBirds), bayBirds, sellBirds), typeBird);
+		
+		cashFlowFoAllIn (stockAll(baySellAll (bayBirds, sellBirds), bayBirds, sellBirds), bayBirds, sellBirds);
+		
+		averageIncome (stockAll(baySellAll (bayBirds, sellBirds), bayBirds, sellBirds), bayBirds, sellBirds);
+		
+		avarageNumbersBirdsOnStock (stockAll(baySellAll (bayBirds, sellBirds), bayBirds, sellBirds), bayBirds, sellBirds);
+
+	}
+	
+	static void dataError (int [][] bayBirds, int [][] sellBirds) {
+		if (nullError(bayBirds, sellBirds)==false) {
+			System.out.println("Error of data");
+			System.exit(0);
+		} 
+		if (lentghError(bayBirds, sellBirds)==false) {
+			System.out.println("Error of data");
+			System.exit(0);
+		} 
+	}
+	
+	static boolean nullError (int [][] bayBirds, int [][] sellBirds) {
+		if (typeBirds == null || priceBirds == null || bayBirds == null || sellBirds == null) {
+			return false;
+		}
+		return true;
+	}
+	
+	static boolean lentghError (int [][] bayBirds, int [][] sellBirds) {
+		if (typeBirds.length == 0 || priceBirds.length != typeBirds.length || bayBirds.length != typeBirds.length ||
+				sellBirds.length != typeBirds.length ) {
+			return false;
+		}
+		return true;
+	}
+	static void avarageNumbersBirdsOnStock (String[][][] stockAll, int [][]  bayBirds, int [][] sellBirds) {
+		System.out.println("Avarage amount birds on stock");
+		int length = length(bayBirds, sellBirds);
+		int [] number = new int [priceBirds.length];
+		for (int i = 0; i<priceBirds.length; i++) {
+			if (priceBirds[i][0].equals(stockAll[i][0][0])) {
+				int sum = 0;
+				for (int k = 1; k<length+1; k++ ) {
+					sum += new Integer(stockAll[i][3][k]);
+				}
+				number[i] =sum;
+			}
+		} 
+		long items = 0;
+		for (int i = 0; i<number.length; i++) {
+			items +=number[i];
+		}
+		System.out.println((items/length +" avarage amount birds" ));	
+	}
+	
+	static void averageIncome (String[][][] stockAll, int [][]  bayBirds, int [][] sellBirds) {
+		System.out.println("Round average income");
+		int length = length(bayBirds, sellBirds);
+		int [] summa = new int [priceBirds.length];
+		int [] number = new int [priceBirds.length];
+		for (int i = 0; i<priceBirds.length; i++) {
+			if (priceBirds[i][0].equals(stockAll[i][0][0])) {
+				int sum = 0;
+				for (int k = 1; k<length+1; k++ ) {
+					sum += new Integer(stockAll[i][3][k]);
+				}
+				summa[i]=(sum*(new Integer(priceBirds[i][1])));
+				number[i] =sum;
+			}
+		} 
+		long cash = 0;
+		for (int i = 0; i<summa.length; i++) {
+			cash +=summa[i];
+		}
+		long items = 0;
+		for (int i = 0; i<number.length; i++) {
+			items +=number[i];
+		}
+		System.out.println(("$"+cash/items +" for one birds" ));
+		System.out.println();
+	}
+	
+	static void cashFlowFoAllIn (String[][][] stockAll, int [][]  bayBirds, int [][] sellBirds) {
+		System.out.println("CashFlow for all in");
+		int length = length(bayBirds, sellBirds);
+		for (int i = 0; i<priceBirds.length; i++) {
+		System.out.print(priceBirds[i][0]+ "s" + " total sales: "+"$");
+			if (priceBirds[i][0].equals(stockAll[i][0][0])) {
+				int sum = 0;
+				for (int k = 1; k<length+1; k++ ) {
+					sum += new Integer(stockAll[i][3][k]);
+				} System.out.println(sum*(new Integer(priceBirds[i][1])));
+			}
+		} System.out.println();
+	}
+	
+
+	static void statisticBalanceForOne (String[][][] stockAll, String typeBird) {
+		System.out.println("Balance for one");
+		for (int i = 0; i<typeBirds.length; i++) {
+			if (stockAll[i][0][0].equals(typeBird)) {
+				System.out.println(stockAll[i][0][0]);
+				System.out.println(Arrays.toString(stockAll[i][1]));
+				System.out.println(Arrays.toString(stockAll[i][2]));
+				System.out.println(Arrays.toString(stockAll[i][3]));
+				System.out.println(Arrays.toString(stockAll[i][4]));
+			}
+		} System.out.println();
+	}
+
+	static void statisticBalanceForAll (String[][][] stockAll) {
+		System.out.println("Balance for all");
+		for (int i = 0; i<typeBirds.length; i++) {
+			if (typeBirds[i].equals(stockAll[i][0][0]))
+				System.out.println("--------------------------------------");
+				System.out.println(stockAll[i][0][0]);
+				System.out.println(Arrays.toString(stockAll[i][1]));
+				System.out.println(Arrays.toString(stockAll[i][2]));
+				System.out.println(Arrays.toString(stockAll[i][3]));
+				System.out.println(Arrays.toString(stockAll[i][4]));
+			}  System.out.println();
+		}
+	
+
+	static void statisticLessThenTRee (String[][][] stockAll, int [][]  bayBirds, int [][] sellBirds) {
+		System.out.println("Statistic of problem with birds on stock");
+		for (int i = 0; i<typeBirds.length; i++) {
+			if (typeBirds[i].equals(stockAll[i][0][0])) {
+				int sum = 0;
+				sum = new Integer(stockAll[i][4][stockAll[i][4].length-1]);
+				if (sum<3) {
+					System.out.print(typeBirds[i]+"s"+ " less then tree: ");
+					System.out.println(sum);
+					System.out.println("Boss! We have a problem! We mast bay some " + typeBirds[i]+"s");
+				}
+			}
+		} System.out.println();
+	}
+	
+		static void staticticFoSellBirds (String[][][] stockAll, int [][]  bayBirds, int [][] sellBirds) {
+			System.out.println("Statictic fo all sell birds");
+			int length = length(bayBirds, sellBirds);
+			for (int i = 0; i<typeBirds.length; i++) {
+			System.out.print(typeBirds[i]+ "s" + " total sales: ");
+				if (typeBirds[i].equals(stockAll[i][0][0])) {
+					int sum = 0;
+					for (int k = 1; k<length+1; k++ ) {
+						sum += new Integer(stockAll[i][3][k]);
+					} System.out.println(sum);
+				}
+			} System.out.println();
+		}
+		
+		static void statisticTotalBirds (String[][][] stockAll, int [][]  bayBirds, int [][] sellBirds) {
+			int minus = 0;
+			for (int i = 0; i<stockAll.length;i++) {
+				if (stockAll[0][4][i]==null) {
+					minus +=1; 
+				}
+			}
+			System.out.println(minus);
+			System.out.println("Statistic of total birds on stock");
+			for (int i = 0; i<typeBirds.length; i++) {
+			System.out.print(typeBirds[i]+ "s" + " we have now: ");
+				if (typeBirds[i].equals(stockAll[i][0][0])) {
+					int sum = 0;
+					sum = new Integer(stockAll[i][4][stockAll[i][4].length-minus]);
+					System.out.println(sum);
+				}
+			} System.out.println();
+		}
+		
+static String[][] arrayPrice (String[] typeBirds, String[][] priceBirds) {
+	String [][] arrayPrice = new String [typeBirds.length][3];
+	for (int i = 0; i<typeBirds.length; i++) {
+		arrayPrice[i][0] = Integer.toString(i+1);
+	}
+	for (int i = 0; i<typeBirds.length; i++) {
+		arrayPrice[i][1] = typeBirds[i];
+	}
+	for (int i = 0; i<typeBirds.length; i++) {
+		if (priceBirds[i][0].equals(typeBirds[i]))
+				arrayPrice[i][2] = priceBirds[i][1];
+	}
+	return arrayPrice;
+	
+}
+	
+	
+	static String [][] baySellAll (int [][]  bayBirds, int [][] sellBirds) {
+		int length = length(bayBirds, sellBirds);
+		String [][] baySellAll = new String [typeBirds.length*2][length+2]; 
+		baySellAllFill (baySellAll, bayBirds, sellBirds, length);
+		return baySellAll;
+	}
+	
+	static void baySellAllFill (String [][] baySellAll, int [][]  bayBirds, int [][] sellBirds, int length) {
+		for  (int i = 0, k=0; i<baySellAll.length; i+=2, k++) {
+			baySellAll[i][0] = typeBirds[k];
+			baySellAll[i+1][0] = typeBirds[k];
+		}
+		for (int i = 0; i<baySellAll.length; i+=2) {
+			baySellAll[i][1] = "bay:";
+			baySellAll[i+1][1] = "sell:";
+		}
+		for (int i = 0, j = 0; i<baySellAll.length; i+=2, j++) {
+			for (int k = 0; k<length; k++)
+			baySellAll[i][k+2] = Integer.toString(bayBirds[j][k]);
+		}
+		for (int i = 1, j = 0; i<baySellAll.length; i+=2, j++) {
+			for (int k = 0; k<length; k++)
+			baySellAll[i][k+2] = Integer.toString(sellBirds[j][k]);
+		}	
+	}
+	
+	static String[][][] stockAll (String [][] baySellAll, int[][] bayBirds, int[][] sellBirds) {
+		String [][][] stockAll = new String [typeBirds.length][5][baySellAll.length];
+		
+		arrayFill(stockAll);
+		
+		arrayFillBay (stockAll, baySellAll);
+		
+		arrayFillSell (stockAll, baySellAll);
+		
+		arrayFillLeftovers (stockAll, baySellAll, bayBirds, sellBirds);
+
+		return stockAll;
+	}
+	
+	static void arrayFill(String [][][] stock) {
+		for (int f = 0; f<typeBirds.length; f++) {
+			stock[f][0][0] = typeBirds[f];
+			for (int i = 0; i<stock.length; i++) {
+				stock[i][1][0] = "Stock was:   ";
+				stock[i][2][0] = "birds in:    ";
+				stock[i][3][0] = "birds out:   ";
+				stock[i][4][0] = "Stock became:";
+
+			}
+		}
+	}
+	
+	static void arrayFillBay (String[][][] stockAll, String[][] baySellAll) {
+		for (int k = 0, j = 0; k<typeBirds.length; k++, j=j+2) {
+			for (int i = 0; i<baySellAll[0].length-2; i++) {
+				stockAll[k][2][i+1] = baySellAll[j][i+2];
+			}
+		}
+	}
+	
+	static void arrayFillSell (String[][][] stockAll, String[][] baySellAll) {
+		for (int k = 0, j = 1; k<typeBirds.length; k++, j=j+2) {
+			for (int i = 0;i<baySellAll[0].length-2; i++) {
+				stockAll[k][3][i+1] = baySellAll[j][i+2];
+			}
+		}
+	}
+	
+	static void arrayFillLeftovers (String[][][] stockAll, String[][] baySellAll, int[][] bayBirds, int[][] sellBirds) {
+		int length = length(bayBirds, sellBirds);
+		for (int k = 0;k<typeBirds.length; k++) {
+			for (int i = 1;i<length+1; i++) {
+				if (i == 1) {
+					stockAll[k][1][i] = "0";
+					stockAll[k][4][i] = Integer.toString((new Integer(stockAll[k][2][i])-
+							new Integer(stockAll[k][3][i])));
+					if (stockError(stockAll[k][4][i]) == false) {
+					enoughProblem(stockAll[k][1][i], stockAll[k][2][i], stockAll[k][0][0]);
+					}
+					
+				}
+				else {
+					stockAll[k][1][i] = stockAll[k][4][i-1];
+					stockAll[k][4][i] = Integer.toString(new Integer(stockAll[k][1][i])+new Integer(stockAll[k][2][i])-
+							new Integer(stockAll[k][3][i]));
+				
+					if (stockError(stockAll[k][4][i]) == false) {
+						enoughProblem(stockAll[k][1][i], stockAll[k][2][i], stockAll[k][0][0]); 
+					}
+				}
+			}
+		}
+//
+//		System.out.println(Arrays.toString(stockAll[1][1]));
+//		System.out.println(Arrays.toString(stockAll[1][2]));
+//		System.out.println(Arrays.toString(stockAll[1][3]));
+//		System.out.println(Arrays.toString(stockAll[1][4]));
+
+	}
+	
+	static boolean stockError (String stockAll) {
+			if ((new Integer(stockAll)<0)) {
+				return false;}
+				return true;
+			
+		}
+
+		static String enoughProblem(String was, String in, String typeBirds) {
+			System.out.println("Boss, we have a problem! We dont have enough " +  typeBirds);
+			int weHave = new Integer(was)+new Integer(in);
+			System.out.println("We can sell only "+ weHave + " " +  typeBirds);
+			System.exit(0);
+			return null;
+			
+		}
+		static int length(int[][] bayBirds, int[][] sellBirds) {
+			int rezult = 0;
+			int bayBirdsE = bayBirds[0].length;
+			int bayBirdsD = bayBirds[1].length;
+			int sellBirdsE = sellBirds[0].length;
+			int sellBirdsD = sellBirds[1].length;
+			if (bayBirdsE>=bayBirdsD) {
+				rezult = bayBirdsE;
+			}
+			else rezult = bayBirdsD;
+			if (rezult>=sellBirdsE) {
+				rezult = rezult;
+			} else rezult =sellBirdsE;
+			if (rezult>=sellBirdsD) {
+				rezult = rezult;
+			} else rezult =sellBirdsD;
+				return rezult;
+		}
+
+}

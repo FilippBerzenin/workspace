@@ -1,0 +1,307 @@
+package finalWorks;
+
+import java.util.Arrays;
+
+public class birds {
+
+	static String[][] birdsArray = new String[10][6];
+	
+	static final int lENGTH = 5;
+	
+	final static String INDEX = "¹";
+	final static String TYPE = "Type birds: ";
+	final static String ON_STOCK =   "On stock: ";
+	final static String BAY = "Bay (in stock): ";
+	final static String SELL = "Sell (out stock): ";
+	final static String PRICE = "Price, $ ";
+
+	public static void main(String[] args) {
+		errorbirdsArray();
+		birdsArrayFill();
+		ArrayFill();
+		additionArray();
+		changeStock();
+		printArray(birdsArray);
+//		statisticsForAll();
+//		statisticTotalBirds();
+//		statisticLessThenTRee();
+//		cashFlowForAll();
+//		averagePrice();
+//		averageCheck();
+		sellBirds();
+
+	}
+
+	static String[][] birds = new String[][] {
+			{ "Type", "On stock:", "Bay (on stock)", "Sell (out stock):", "Price, $" },
+			{ "Eagle", "10", "15", "5", "15" }, 
+			{ "Duck", "15", "25", "10", "3" } };
+			
+
+	static void sellBirds() {
+		String [][] sellBirds = new String[findNull()][10];
+		sellBirds[0] = new String[] {"¹", "Type birds, sell"};
+		System.out.println(Arrays.toString(sellBirds[0]));
+		for (int i = 1;i<findNull();i++) {
+			sellBirds[i][1] = birdsArray[i][1];
+			sellBirds[findTypeBirds(sellBirds[i][1])] = new String[] {sellBirds[i][1], "5", "4", "1", "1", "2"}; 
+			System.out.println(Arrays.toString(sellBirds[i]));
+		}
+		
+//		sellBirds[findTypeBirds("Eagle")] = new String[] {"Eagle", "5", "4", "1", "1", "2"}; 
+//		System.out.println(Arrays.toString(sellBirds[1]));	
+	}
+	
+	
+	static int findTypeBirds(String type) {
+		int indexType=100;
+		for (int i = 1; i < findNull(); i++) {
+			if (birdsArray[i][1].equals(type)) {
+				indexType = i;
+			break;
+			}
+		}
+		return indexType;
+
+	}
+	
+	static int findNullHorizont(String[][] sellBirds, String type) {
+		int vertikal = findTypeBirds(type);
+		int j = 0;
+		for (int k = 0; k < sellBirds[vertikal].length; k++) {
+			if (sellBirds[vertikal][k] == null) {
+				j = k;
+				break;
+			}
+			return k;
+		}
+		return 0;
+
+	}
+	
+			
+	static void changeStock() {
+		enterBay("Duck", 5);
+		enterSell("Duck", 15);
+		enterBay("Eagle", 15);
+		enterSell("Eagle", 15);
+		enterBay("Fenix", 5);
+		enterSell("Fenix", 5);
+	}
+	
+	static void averagePrice() {
+		System.out.print("\n"+"Average price for all birds: $");
+		int sum = 0;
+		int index = findNull()-1;
+		for (int i = 1; i<findNull(); i++) {
+			sum+=new Integer(birdsArray[i][5]);
+		}
+		System.out.println(sum/index);
+	}
+	static void averageCheck() {
+		System.out.print("\n"+"Average check for one sell: $");
+		int sum = 0;
+		int total = 0;
+		for (int i = 1; i<findNull(); i++) {
+			sum+=new Integer(birdsArray[i][4])*new Integer(birdsArray[i][5]);
+			total+=new Integer(birdsArray[i][4]);
+		}
+		System.out.println(sum/total);
+	}
+	
+	static void cashFlowForAll() {
+		System.out.println("\n"+"CashFlow for all");
+		int sum = 0;
+		for (int i = 1; i<findNull(); i++) {
+			System.out.printf(birdsArray[i][1]+ "s" + " total sales: "+"\t"+"+$"+(new Integer(birdsArray[i][4])
+					*new Integer(birdsArray[i][5]))+"\n");
+			sum += new Integer(birdsArray[i][4])*new Integer(birdsArray[i][5]);
+		}
+		System.out.println("------------------------------");
+		System.out.println("Total, $"+sum);
+	}
+	
+	static void statisticsForAll () {
+		System.out.println("\n"+"Statictic fo all sell birds");
+		for (int i = 1; i<findNull(); i++) {
+			System.out.printf(birdsArray[i][1]+ "s" + " total sales, items: "+"\t"+birdsArray[i][4]+"\n");
+		}
+	}
+	
+	static void statisticTotalBirds () {
+		System.out.println("\n"+"Statistic of total birds on stock");
+		for (int i = 1; i<findNull(); i++) {
+			System.out.printf(birdsArray[i][1]+ "s" +" we have now: "+"\t"+birdsArray[i][2]+"\n");
+		}
+	}
+	
+	static void statisticLessThenTRee () {
+		System.out.println("\n"+"Statistic of problem with birds on stock");
+		for (int i = 1; i<findNull(); i++) {
+			int k = new Integer(birdsArray[i][2]);
+			if (k<=3) {
+			System.out.printf(birdsArray[i][1]+ "s" +" less then tree: "+"\t"+birdsArray[i][2]+"\n");
+			}
+		}
+	}
+	
+	static void enterBay(String type, int bay) {
+		for (int i = 0; i<findNull(); i++) {
+			if (birdsArray[i][1].equals(type)) {
+				birdsArray[i][3] = Integer.toString(new Integer(birdsArray[i][3])+bay);
+				birdsArray[i][2] = Integer.toString(new Integer(birdsArray[i][2])+bay);
+			}
+		}
+	}
+	
+	static void enterSell(String type, int sell) {
+		for (int i = 0; i<findNull(); i++) {
+			if (birdsArray[i][1].equals(type)) {
+				if (stockFills(i, sell)==true) {
+				birdsArray[i][4] = Integer.toString(new Integer(birdsArray[i][4])+sell);
+				birdsArray[i][2] = Integer.toString(new Integer(birdsArray[i][2])-sell);
+}
+			}
+		}
+	}
+
+//	static void enterBay() {
+//		Scanner sc = new Scanner (System.in);
+//		System.out.println("Please! Enter type birds:");
+//		String type = stringScanner();
+//		System.out.println("Please! Enter number birds which, you want to bay");
+//		int bay = intScanner();
+//		for (int i = 0; i<findNull(); i++) {
+//			if (birdsArray[i][1].equals(type)) {
+//				birdsArray[i][3] = Integer.toString(new Integer(birdsArray[i][3])+bay);
+//				recalculation (i);
+//			}
+//		}
+//	}
+//	
+//	static String stringScanner () {
+//		Scanner sc = new Scanner (System.in);
+//		String type = sc.next();
+//		sc.close();
+//		return type;
+//	}
+//	
+//	static int intScanner () {
+//		Scanner sc = new Scanner (System.in);
+//		int number = sc.nextInt();
+//		sc.close();
+//		return number;
+//	}	
+	
+	
+	static void recalculation (int k) {
+			int a = new Integer(birdsArray[k][2]);
+			int b = new Integer(birdsArray[k][3]);
+			int c = new Integer(birdsArray[k][4]);
+			if (a != (b-c)) {
+				String onStock = null;
+				onStock = Integer.toString(b-c);
+				birdsArray[k][2]=onStock;
+				erroradditionArray();
+			}
+
+			}
+	static boolean stockFills (int k, int sell) {
+		int a = new Integer(birdsArray[k][2]);
+		if (sell<=a) {
+		return true;
+
+		}
+		else {
+		System.out.println("Boss! We dont have enough"+" "+birdsArray[k][1]+"s.");
+		System.out.println("Boss! We can sell only "+birdsArray[k][2]+" "+birdsArray[k][1]+"s.");
+		return false;}
+		
+	}
+
+			
+	static void additionArray() {
+		String[] newBirds = new String[] { "Fenix", "5", "5", "0", "100" };
+		ArrayFillNew(newBirds);
+	}
+	
+	static int findNull () {
+		int j = 0;
+		for (int i = 0; i < birdsArray.length; i++) {
+			if (birdsArray[i][0] == null) {
+				j = i;
+				break;
+			}
+		}
+		return j;
+	}
+
+	static void ArrayFillNew(String[] newBirds) {
+		int j = findNull();
+		System.arraycopy(newBirds, 0, birdsArray[j], 1, newBirds.length);
+		birdsArrayIndex(j);
+
+	}
+
+	static void erroradditionArray() {
+		int sum = 0;
+		for (int i = 0; i < birdsArray.length; i++) {
+			if (birdsArray[i][0] == null)
+				sum += 1;
+		}
+		if (sum < 1) {
+			System.out.println("Error of langth main array");
+			System.exit(0);
+		}
+		if (sum >= 1 & sum <= 3) {
+			System.out.println("Attention! Array has onli " + sum + " free line");
+		}
+	}
+
+	static void printArray(String[][] birdsArray) {
+		for (int k = 0; k < birdsArray[0].length; k++) {
+			System.out.print(birdsArray[0][k] + "\t");
+		}
+		System.out.print("\n");
+			for (int i = 1; i < findNull(); i++) {
+				System.out.printf("%2s", birdsArray[i][0] + "\t");
+				System.out.printf("%3s", birdsArray[i][1] + "\t" + "\t");
+				System.out.printf("%-3s", birdsArray[i][2] + "\t" + "\t");
+				System.out.printf("%-3s", birdsArray[i][3] + "\t" + "\t" + "\t");
+				System.out.printf("%-3s", birdsArray[i][4] + "\t" + "\t" + "\t");
+				System.out.printf("%-3s%n", birdsArray[i][5]);
+				recalculation(i);
+			}
+
+		}
+	
+	
+
+	static void birdsArrayFill() {
+		birdsArray[0][0] = INDEX;
+		birdsArray[0][1] = TYPE;
+		birdsArray[0][2] = ON_STOCK;
+		birdsArray[0][3] = BAY;
+		birdsArray[0][4] = SELL;
+		birdsArray[0][5] = PRICE;
+	}
+
+	static void ArrayFill() {
+		for (int i = 1, k = 1; i < birds.length; i++, k++) {
+			System.arraycopy(birds[i], 0, birdsArray[k], 1, birds[i].length);
+			birdsArrayIndex(k);
+		}
+	}
+
+	static void birdsArrayIndex(int i) {
+		birdsArray[i][0] = Integer.toString(i);
+	}
+
+	static void errorbirdsArray() {
+		if (birdsArray == null || birdsArray.length == 0) {
+			System.out.println("Error data");
+			System.exit(1);
+		}
+	}
+
+}

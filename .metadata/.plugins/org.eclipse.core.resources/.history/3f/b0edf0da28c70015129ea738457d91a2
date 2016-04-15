@@ -1,0 +1,38 @@
+package lesson_4;
+
+import java.util.Arrays;
+
+public class birds {
+	
+	static String[] typeBirds = new String [] {"eagle", "duck"};
+	
+	static String[][] priceBirds = new String [][] {{"eagle", "5"}, {"duck", "2"}};
+
+	public static void main(String[] args) {
+	
+//		stock(typeBirds, priceBirds);
+		
+		arrayPrice(typeBirds, priceBirds);
+
+	}
+		static String[][][] stock (String[] typeBirds) {
+			return null;
+		}
+		
+		static String[][] arrayPrice (String[] typeBirds, String[][] priceBirds) {
+			String [][] arrayPrice = new String [typeBirds.length][4];
+			for (int i = 0; i<typeBirds.length; i++) {
+				arrayPrice[i][0] = Integer.toString(i+1);
+			}
+			for (int i = 0; i<typeBirds.length; i++) {
+				arrayPrice[i][1] = typeBirds[i];
+			}
+			for (int i = 0; i<typeBirds.length; i++) {
+				if (priceBirds[i][0].equals(typeBirds[i]))
+						arrayPrice[i][2] = priceBirds[i][1];
+			}
+			System.out.println(Arrays.toString(arrayPrice[1]));
+			return arrayPrice;
+			
+		}
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/kademika-jd-Nov15-Berzenin.Filipp/src/Lesson_2/frame_2_11.java"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="1"/>
+</listAttribute>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="Lesson_2.frame_2_11"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="kademika-jd-Nov15-Berzenin.Filipp"/>
+</launchConfiguration>

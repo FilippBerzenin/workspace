@@ -1,0 +1,277 @@
+package lesson_4;
+
+import java.util.Arrays;
+
+public class birds {
+	
+	static String[] typeBirds = new String [] {"eagle", "duck"};
+	
+	static String[][] priceBirds = new String [][] {{"eagle", "5"}, {"duck", "2"}};
+
+	public static void main(String[] args) {
+	
+				
+		stock(arrayPrice(typeBirds, priceBirds));
+		
+		int [] bayBirdsEagle = new int [] {
+			5,
+			2,
+			3
+		};
+		
+		int [] sellBirdsEagle = new int [] {
+			2,
+			5,
+			2
+		};
+
+		int [] bayBirdsDuck = new int [] {
+			10,
+			15,
+			7
+		};
+		
+		int [] sellBirdsDuck = new int [] {
+			7,
+			18,
+			7
+		};
+		
+		stockAll(baySellAll (bayBirdsEagle, sellBirdsEagle, bayBirdsDuck, sellBirdsDuck));
+//		stockDuck(bayBirdsDuck, sellBirdsDuck);
+		baySellAll(bayBirdsEagle, sellBirdsEagle, bayBirdsDuck, sellBirdsDuck);
+	}
+	static String [][] baySellAll (int []  bayBirdsEagle, int [] sellBirdsEagle, int[] bayBirdsDuck, int[]sellBirdsDuck) {
+		String [][] baySellAll = new String [4][length(bayBirdsEagle, sellBirdsEagle, bayBirdsDuck, sellBirdsDuck)]; {
+			baySellAll[0][0] = "Eagle";
+			baySellAll[0][1] = "bay:";
+			for (int i = 0; i<bayBirdsEagle.length; i++) {
+				baySellAll[0][i+2] = Integer.toString(bayBirdsEagle[i]);
+			}// покупка орлов
+			baySellAll[1][0] = "Eagle";
+			baySellAll[1][1] = "sell:";		
+			for (int i = 0; i<sellBirdsEagle.length; i++) {
+				baySellAll[1][i+2] = Integer.toString(sellBirdsEagle[i]);
+			}// продажа орлов
+			baySellAll[2][0] = "Duck";
+			baySellAll[2][1] = "bay:";			
+			for (int i = 0; i<bayBirdsDuck.length; i++) {
+				baySellAll[2][i+2] = Integer.toString(bayBirdsDuck[i]);
+			}// покупка уток
+			baySellAll[3][0] = "Duck";
+			baySellAll[3][1] = "sell:";			
+			for (int i = 0; i<sellBirdsDuck.length; i++) {
+				baySellAll[3][i+2] = Integer.toString(sellBirdsDuck[i]); 
+			}// продажа уток
+		} //System.out.println(Arrays.toString(baySellAll[3]));
+		return baySellAll;
+	}
+	
+	static String[][][] stockAll (String [][] baySellAll) {
+		String [][][] stockAll = new String [10][5][baySellAll.length+5];
+		
+		arrayFill(stockAll);
+		
+		arrayFillBay (stockAll, baySellAll);
+		
+		arrayFillSell (stockAll, baySellAll);
+		
+		arrayFillLeftovers (stockAll, baySellAll);
+		
+
+		
+//			for (int i = 0;i<bayBirdsEagle.length; i++) {
+//				stockEagle[i][4] = Integer.toString(bayBirdsEagle[i]);
+//			}
+//			for (int i = 0 ; i<sellBirdsEagle.length; i++) {
+//				stockEagle[i][6] = Integer.toString(sellBirdsEagle[i]);
+//	
+//			}
+
+		return stockAll;
+	}
+	
+	static void arrayFill(String [][][] stock) {
+		for (int f = 0; f<typeBirds.length; f++) {
+			stock[f][0][0] = typeBirds[f];
+			for (int i = 0; i<stock.length; i++) {
+				stock[i][1][0] = "Stock was:   ";
+				stock[i][2][0] = "birds in:    ";
+				stock[i][3][0] = "birds out:   ";
+				stock[i][4][0] = "Stock became:";
+
+			}
+		}
+	}
+	
+	static void arrayFillBay (String[][][] stockAll, String[][] baySellAll) {
+		for (int k = 0, j = 0; k<2; k++, j=j+2) {
+			for (int i = 0; i<baySellAll[0].length-2; i++) {
+				stockAll[k][2][i+1] = baySellAll[j][i+2];
+			}
+		}
+		System.out.println(stockAll[0].length);
+	}
+	
+	static void arrayFillSell (String[][][] stockAll, String[][] baySellAll) {
+		for (int i = 0;i<baySellAll[0].length-2; i++) {
+		stockAll[0][3][i+1] = baySellAll[1][i+2]; // продажа орлов 
+		}
+
+		for (int i = 0;i<baySellAll[0].length-2; i++) {
+			stockAll[1][3][i+1] = baySellAll[3][i+2]; // продажа уток
+		}
+	}
+	
+	static void arrayFillLeftovers (String[][][] stockAll, String[][] baySellAll) {
+		for (int i = 1;i<baySellAll[0].length; i++) {
+		if (i == 1) {
+			stockAll[0][1][i] = "0";
+			stockAll[0][4][i] = Integer.toString((new Integer(stockAll[0][2][i])-new Integer(stockAll[0][3][i])));
+		}
+//		else 
+//			stockAll[0][1][i] = "8";
+//			stockAll[i][4][i+1] = Integer.toString((new Integer(baySellAll[0][i+2])-new Integer(baySellAll[1][i+2])+
+//					new Integer(baySellAll[1][i+1])));
+//			if (stockError(stockEagle[i]) == false) {
+//				enoughProblem(stockEagle[i]); 
+//				System.out.println("Boss, we have a problem! We dont have enough eagles");
+//				System.exit(0);
+			}
+
+//		}
+		System.out.println(Arrays.toString(stockAll[0][1]));
+		System.out.println(Arrays.toString(stockAll[0][2]));
+		System.out.println(Arrays.toString(stockAll[0][3]));
+		System.out.println(Arrays.toString(stockAll[0][4]));
+	}
+	
+	static int length(int[] bayBirdsEagle, int[] sellBirdsEagle, int []bayBirdsDuck, int[] sellBirdsDuck) {
+		int length = 10;
+//		if (bayBirdsEagle.length>=sellBirdsEagle.length && bayBirdsEagle.length>=bayBirdsDuck.length &&
+//				bayBirdsEagle.length>=sellBirdsDuck.length){
+//			length = bayBirdsEagle.length;
+//		}
+//		else if (sellBirdsEagle.length>=bayBirdsEagle.length && sellBirdsEagle.length>=bayBirdsDuck.length &&
+//				sellBirdsEagle.length>=sellBirdsDuck.length){
+//			length = sellBirdsEagle.length;
+//		}
+//		else if (bayBirdsDuck.length>=bayBirdsEagle.length && bayBirdsEagle.length>=sellBirdsEagle.length &&
+//				bayBirdsDuck.length>=sellBirdsDuck.length){
+//			length = sellBirdsEagle.length;
+//		}
+//		else if (bayBirdsDuck.length>=bayBirdsEagle.length && bayBirdsEagle.length>=sellBirdsEagle.length &&
+//				bayBirdsDuck.length>=sellBirdsDuck.length){
+//			length = sellBirdsEagle.length;
+//		}
+//			
+//			length = sellBirdsDuck.length;
+//		System.out.println(length);
+			return length;
+	}
+	
+//	static String[][] stockDuck (int []  bayBirdsDuck, int [] sellBirdsDuck) {
+//		String [][] stockDuck = new String [bayBirdsDuck.length][9];
+//			for (int i = 0; i<stockDuck.length; i++) {
+//			stockDuck[i][0] = "Duck";
+//			stockDuck[i][1] = "Stock was:";
+//			stockDuck[i][2] = null;
+//			stockDuck[i][3] = "birds in:";
+//			stockDuck[i][4] = null;
+//			stockDuck[i][5] = "birds out:";
+//			stockDuck[i][6] = null;
+//			stockDuck[i][7] = "Stock became";
+//			stockDuck[i][8] = null;
+//		}
+//			for (int i = 0;i<bayBirdsDuck.length; i++) {
+//				stockDuck[i][4] = Integer.toString(bayBirdsDuck[i]);
+//			}
+//			for (int i = 0 ; i<sellBirdsDuck.length; i++) {
+//				stockDuck[i][6] = Integer.toString(sellBirdsDuck[i]);
+//			}
+//			for (int i = 0;i<bayBirdsDuck.length; i++) {
+//				if (i == 0) {
+//					stockDuck[i][2] = "0";
+//					stockDuck[i][8] = Integer.toString(bayBirdsDuck[i]-sellBirdsDuck[i]);
+//				}
+//				else 
+//					stockDuck[i][2] = stockDuck[i-1][8];
+//					stockDuck[i][8] = Integer.toString((bayBirdsDuck[i])-sellBirdsDuck[i]+new Integer(stockDuck[i][2]));
+//				if (stockError(stockDuck[i]) == false) {
+//						enoughProblem(stockDuck[i]); 
+//
+//					}
+////					System.out.println(Arrays.toString(stockDuck[i]));
+//			}
+//			
+//		return stockDuck;
+//	}
+		
+		static boolean stockError (String[] stock) {
+			for  (int i = 0;i<stock.length; i++) {
+				if (stock[i]==null) {
+					stock[i] = "0";
+				}
+			}
+			if ((new Integer(stock[2])+new Integer(stock[4]))<new Integer(stock[6])) {
+				return false;}
+				return true;
+			
+		}
+
+		static String enoughProblem(String [] stockProblem) {
+			System.out.println(Arrays.toString(stockProblem));
+			System.out.println("Boss, we have a problem! We dont have enough " + stockProblem[0]);
+			int weHave = new Integer(stockProblem[2])+new Integer(stockProblem[4]);
+			System.out.println("We can sell only "+ weHave + " " + stockProblem[0]);
+			System.exit(0);
+			return null;
+			
+		}
+	
+		static String[][][] stock (String[][] arrayPrice) {
+			String [][][] stock = new String [arrayPrice.length][4][0];
+
+			for (int i = 0; i<arrayPrice[0].length-1; i++) {
+				stock[i][0] = new String [1];
+				stock[i][0][0] = arrayPrice[i][0];
+				for (int k = 1; k<arrayPrice[0].length; k++) {
+					stock[i][k] = new String [7];
+					stock[i][k][0] = arrayPrice[i][1];
+					stock[i][k][1] = "Stock now";
+					stock[i][k][2] = null;
+					stock[i][k][3] = "birds in";
+					stock[i][k][4] = null;
+					stock[i][k][5] = "birds out";
+					stock[i][k][6] = null;
+				}
+			}
+			for (int i =0;i<arrayPrice[0].length-1; i++) {
+				stock[i][2] = new String [4]; // при условии введения себестоимости закупки длину поля нужна увеличить.
+				stock[i][2][0] = "priceFoSell";
+				stock[i][2][2] = "priceFoBay";
+				stock[i][2][1] = arrayPrice[i][2];
+			}
+			stock[0][3] = new String [2]; // одно значение входящие
+//			System.out.println(Arrays.toString(stock[0][1]));
+//			System.out.println(Arrays.toString(stock[1][2]));
+//			System.out.println(stock[0][0][0]);
+			return stock;
+		}
+		
+		static String[][] arrayPrice (String[] typeBirds, String[][] priceBirds) {
+			String [][] arrayPrice = new String [typeBirds.length][3];
+			for (int i = 0; i<typeBirds.length; i++) {
+				arrayPrice[i][0] = Integer.toString(i+1);
+			}
+			for (int i = 0; i<typeBirds.length; i++) {
+				arrayPrice[i][1] = typeBirds[i];
+			}
+			for (int i = 0; i<typeBirds.length; i++) {
+				if (priceBirds[i][0].equals(typeBirds[i]))
+						arrayPrice[i][2] = priceBirds[i][1];
+			}
+			return arrayPrice;
+			
+		}
+}

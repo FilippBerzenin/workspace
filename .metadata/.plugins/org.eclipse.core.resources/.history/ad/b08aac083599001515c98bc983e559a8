@@ -1,0 +1,20 @@
+package Lesson_2;
+
+public class frame_2_4 {
+
+	public static void main(String[] args) {
+		//System.out.println(boolean(10 > 3));
+		boolean x = (10>3);
+		System.out.println(x);
+		//(10 - 35) > 0;
+		//int a == 1;
+		//double d = 5;
+		//d == 30;
+		//d! = 30;
+	}
+
+
+		
+	}
+
+

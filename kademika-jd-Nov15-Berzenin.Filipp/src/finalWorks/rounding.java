@@ -1,0 +1,32 @@
+package finalWorks;
+
+public class rounding {
+
+	public static void main(String[] args) {
+		double x = 1.5454;
+		rounding(x);
+	}
+
+	static int rounding(double x) {
+		int roundingAfterPoint = 2;
+		String k = null;
+		String xSt = Double.toString(x);
+		for (int i = xSt.length() - 1; i > 1 + roundingAfterPoint; i--) {
+			k = xSt.substring(i);
+			int v = new Integer(k);
+			if (v >= 5) {
+				double r = 1;
+				r = r / Math.pow(10, i - 2);
+				x += r;
+			}
+			xSt = Double.toString(x);
+			xSt = xSt.substring(0, i);
+			x = new Double(xSt);
+
+		}
+		int rezult=(int)(x*100);
+		System.out.println(rezult+"%");
+		return rezult;
+	}
+
+}

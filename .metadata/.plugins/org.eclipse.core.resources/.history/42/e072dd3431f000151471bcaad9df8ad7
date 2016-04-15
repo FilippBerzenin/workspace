@@ -1,0 +1,47 @@
+import javax.swing.*;
+import java.awt.*;
+public class FirstPage {
+	public static void main (String[] args){
+	
+	}
+	
+	private static javax.swing.JPanel JPanel1 () {
+		
+		}
+		
+	JPanel windowContent = JPanel1();
+		
+	JPanel myJPanel = new JPanel();
+	FlowLayout f1 = new FlowLayout();
+
+	JLabel lebel1 = new JLabel ("Number 1:");
+	JTextField field1 = new JTextField (10);
+	JLabel lebel2 = new JLabel ("Number 2:");
+	JTextField field2 = new JTextField (10);
+	JLabel lebel3 = new JLabel ("Sum:");
+	JTextField rezult = new JTextField (10);
+	JButton go = new JButton ("Add");
+	
+	windowContent.add(lebel1);
+	windowContent.add(field1);
+	windowContent.add(lebel2);
+	windowContent.add(field2);
+	windowContent.add(lebel3);
+	windowContent.add(rezult);
+	windowContent.add(go);
+	
+	JFrame frame = new JFrame ("My first calculator");
+	frame.setContentPane(windowContent);
+	
+	frame.setSize(400, 100);
+	frame.setVisible(true);
+
+}
+
+	private static JPanel JPanel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	}

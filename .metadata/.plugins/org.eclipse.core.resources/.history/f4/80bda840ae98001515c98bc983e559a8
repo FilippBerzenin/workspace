@@ -1,0 +1,22 @@
+package Lesson_2;
+
+public class frame_2_3 {
+
+	public static void main(String[] args) {
+	
+		System.out.println(square(11));
+		squareTwo(4);
+
+	}
+	
+	static double square (double number){
+		
+		return number * number;
+	}
+	
+	static void squareTwo (int number){
+		number = number * number;
+		System.out.println(number);
+	}
+}
+

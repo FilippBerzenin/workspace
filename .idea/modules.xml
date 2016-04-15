@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/JavaProgrammer/JavaProgrammer.iml" filepath="$PROJECT_DIR$/JavaProgrammer/JavaProgrammer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PRACKTIKUM/PRACKTIKUM.iml" filepath="$PROJECT_DIR$/PRACKTIKUM/PRACKTIKUM.iml" />
+      <module fileurl="file://$PROJECT_DIR$/YakovFayn/YakovFayn.iml" filepath="$PROJECT_DIR$/YakovFayn/YakovFayn.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kademika-jd-Nov15-Berzenin.Filipp/kademika-jd-Nov15-Berzenin.Filipp.iml" filepath="$PROJECT_DIR$/kademika-jd-Nov15-Berzenin.Filipp/kademika-jd-Nov15-Berzenin.Filipp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kubik_rubik/kubik_rubik.iml" filepath="$PROJECT_DIR$/kubik_rubik/kubik_rubik.iml" />
+      <module fileurl="file://$PROJECT_DIR$/seconds9weeks/seconds9weeks.iml" filepath="$PROJECT_DIR$/seconds9weeks/seconds9weeks.iml" />
+      <module fileurl="file://$PROJECT_DIR$/testjavarash/testjavarash.iml" filepath="$PROJECT_DIR$/testjavarash/testjavarash.iml" />
+    </modules>
+  </component>
+</project>
