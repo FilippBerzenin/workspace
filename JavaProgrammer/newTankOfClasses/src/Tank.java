@@ -1,7 +1,7 @@
 
 public class Tank {
 
-    private final int speed = 5;
+    private final int speed = 10;
 
     private int x;
     private int y;

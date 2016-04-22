@@ -1,7 +1,7 @@
 
 public class Bullet {
 
-    private final int speed = 10;
+    private final int speed = 5;
     private int x = 0;
     private int y = 0;
     private int dirction = 1;

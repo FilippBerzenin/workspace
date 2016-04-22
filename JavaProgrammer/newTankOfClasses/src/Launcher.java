@@ -4,7 +4,7 @@
 public class Launcher {
 
     public static void main (String[] args) throws Exception {
-        ActionField bf = new ActionField();
-        bf.mainActionField();
+        ActionField af = new ActionField();
+        af.runTheGame();
     }
 }

@@ -116,10 +116,6 @@ public class ActionField extends JPanel {
     public String getQuadrantXY(int v, int h) {
         return (v - 1) * 64 + "_" + (h - 1) * 64;
     }
-    public static void mainActionField () throws Exception {
-        ActionField bf = new ActionField();
-        bf.runTheGame();
-    }
 
     public ActionField() throws Exception {
         battelField = new BattelField();
